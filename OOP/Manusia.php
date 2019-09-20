@@ -13,15 +13,18 @@
  */
 class Manusia {
 
-    //put your code here
+    //property
     public $nama = "sonif";
 
+    //method
     public function getNama() {
         return $this->nama;
     }
 
 }
 
+//instansiasi
 $manusia = new Manusia();
-//
+
+//pemanggilan method object manusia
 echo $manusia->getNama();

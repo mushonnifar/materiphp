@@ -12,12 +12,15 @@ include 'Manusia.php';
  * @author Lenovo
  */
 class Cowok extends Manusia {
-    //put your code here
+    
+    //method
     public function getEx(){
         return $this->nama;
     }
 }
 
-$setan = new Cowok();
+//instansiasi
+$lanang = new Cowok();
 
-echo $setan->getEx();
+//pemanggilan method
+echo $lanang->getEx();
