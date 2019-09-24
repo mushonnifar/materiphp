@@ -24,6 +24,8 @@ class User {
 $user = new User();
 
 //memanggil konstanta dari method
-echo $user->getJK() . '<br>';
+//echo $user->getJK() . '<br>';
 //memanggil konstanta dengan double colon
-echo $user::JK;
+//echo $user::JK;
+//pemanggilan class
+echo User::JK;

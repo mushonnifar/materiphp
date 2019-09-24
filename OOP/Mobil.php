@@ -8,7 +8,7 @@
 class Mobil {
 
     //Property
-    private $jumlahRoda;
+    public $jumlahRoda;
     //Property
     private $jumlahKursi;
 
@@ -30,6 +30,7 @@ class Mobil {
 }
 
 $sedan = new Mobil(); //Object
-$sedan->setJumlahRoda(4);
-$sedan->setJumlahKursi(6);
-$sedan->cetak();
+$sedan->setJumlahRoda(14);
+$sedan->setJumlahKursi(16);
+//$sedan->cetak();
+echo $sedan->jumlahRoda;

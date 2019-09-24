@@ -14,7 +14,7 @@
 class Manusia {
 
     //property
-    public $nama = "sonif";
+    protected $nama = "sonif";
 
     //method
     public function getNama() {
@@ -27,4 +27,4 @@ class Manusia {
 $manusia = new Manusia();
 
 //pemanggilan method object manusia
-echo $manusia->getNama();
+//echo $manusia->getNama();
