@@ -7,12 +7,12 @@ include 'Sunny.php';
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+use NiceWeather\Foo\Bar\Side\Sunny as Te;
 /**
  * Description of Forecast
  *
  * @author Lenovo
  */
 $rain = new Rain();
-$sunny = new NiceWeather\Sunny();
+$sunny = new Te();
 

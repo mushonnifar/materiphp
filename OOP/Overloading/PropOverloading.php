@@ -3,6 +3,7 @@
 class PropOverloading {
 
     /** Location for overloaded data. */
+//    public $a = 1;
     private $data = array();
 
     /** Overloading not used on declared properties. */

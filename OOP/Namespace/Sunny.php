@@ -1,6 +1,6 @@
 <?php
 
-namespace NiceWeather;
+namespace NiceWeather\Foo\Bar\Side;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
