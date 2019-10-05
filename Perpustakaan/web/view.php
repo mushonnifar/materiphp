@@ -18,9 +18,13 @@
                 <td><?= $value['name'] ?></td>
                 <td><?= $value['penerbit'] ?></td>
                 <td><?= $value['pengarang'] ?></td>
-                <td></td>
+                <td>
+                    <a href="?action=edit&id=<?= $value['id'] ?>" class="btn btn-sm btn-warning">Edit</a>&nbsp;
+                    <a href="?action=delete&id=<?= $value['id'] ?>" class="btn btn-sm btn-danger">Delete</a>
+                </td>
             </tr>
             <?php $i++;
-        } ?>
+        }
+        ?>
     <tbody>
 </table>

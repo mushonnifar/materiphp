@@ -46,4 +46,45 @@ class Database {
         return $data;
     }
 
+    public function find($table, $id) {
+        $query = "select * from " . $table . " where id = " . $id;
+        $result = $this->conn->query($query);
+        if (!$result) {
+            throw new Exception("Gagal membaca data !");
+        }
+        $data = $result->fetch_array(MYSQLI_ASSOC);
+
+        return $data;
+    }
+
+    public function update($table, $id, $field) {
+        $query = "update " . $table . " set ";
+        $n = count($field);
+        $i = 1;
+        foreach ($field as $key => $value) {
+            $query .= $key . " = '" . $value . "'";
+            if ($i < $n) {
+                $query .= ", ";
+            }
+            $i++;
+        }
+        $query .= " where id = '" . $id . "'";
+
+        $result = $this->conn->query($query);
+        if (!$result) {
+            throw new Exception("Gagal menyimpan !");
+        }
+        return $result;
+    }
+
+    public function delete($table, $id) {
+        $query = "delete from " . $table . " where id = " . $id;
+
+        $result = $this->conn->query($query);
+        if (!$result) {
+            throw new Exception("Gagal menghapus !");
+        }
+        return $result;
+    }
+
 }

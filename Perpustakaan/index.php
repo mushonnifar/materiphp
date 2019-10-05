@@ -41,6 +41,18 @@ if (!empty($_GET["action"])) {
                     }
                     require_once "web/create.php";
                     break;
+                case "edit":
+                    if (isset($_POST['edit'])) {
+                        $buku->update();
+                    }
+                    $id = $_GET['id'];
+                    $data = $buku->find($id);
+                    require_once "web/edit.php";
+                    break;
+                case "delete":
+                    $id = $_GET['id'];
+                    $data = $buku->delete($id);
+                    break;
                 default :
                     require_once "web/view.php";
                     break;
