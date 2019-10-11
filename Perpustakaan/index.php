@@ -17,8 +17,12 @@ if (!empty($_GET["action"])) {
         <meta name="generator" content="Jekyll v3.8.5">
         <title>Sistem Perpustakaan</title>
         <!-- Bootstrap core CSS -->
-        <link href="asset/bootstrap/css/bootstrap.min.css" rel="stylesheet" >
+        <link href="asset/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="asset/DataTables/datatables.min.css" rel="stylesheet">
 
+        <script type="text/javascript" src="asset/jquery/jquery-3.4.1.min.js"></script>
+        <script type="text/javascript" src="asset/bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="asset/DataTables/datatables.min.js"></script>
     </head>
     <body>
         <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
@@ -26,7 +30,7 @@ if (!empty($_GET["action"])) {
             <nav class="my-2 my-md-0 mr-md-3">
                 <a class="p-2 text-dark" href="?action=create">Create Buku</a>
                 <a class="p-2 text-dark" href="index.php">Buku</a>
-                <a class="p-2 text-dark" href="#">Menu 3</a>
+                <a class="p-2 text-dark" href="?action=anggota">Anggota</a>
                 <a class="p-2 text-dark" href="#">Menu 4</a>
             </nav>
             <a class="btn btn-outline-primary" href="#">Sign up</a>
@@ -52,6 +56,9 @@ if (!empty($_GET["action"])) {
                 case "delete":
                     $id = $_GET['id'];
                     $data = $buku->delete($id);
+                    break;
+                case "anggota":
+                    require_once "web/anggota_view.php";
                     break;
                 default :
                     require_once "web/view.php";
