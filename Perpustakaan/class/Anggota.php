@@ -15,7 +15,7 @@ require 'Database.php';
 class Anggota {
 
     private $db;
-    private $table = 'anggotass';
+    private $table = 'anggota';
 
     public function __construct() {
         $this->db = new Database();
@@ -34,7 +34,8 @@ class Anggota {
                     'tempat_lahir' => $value['tempat_lahir'],
                     'tanggal_lahir' => $value['tanggal_lahir'],
                     'alamat' => $value['alamat'],
-                    'action' => ''
+                    'action' => '<button class="btn btn-warning" onclick="edit(' . $value['id'] . ')">Edit</button>&nbsp;'
+                    . '<button class="btn btn-danger" onclick="remove(' . $value['id'] . ')">Delete</button>'
                 ];
                 array_push($result['data'], $arr);
                 $i++;
@@ -73,4 +74,73 @@ class Anggota {
         }
     }
 
+    public function find($id) {
+        try {
+            $data = $this->db->find($this->table, $id);
+            $response = [
+                "status" => "success",
+                "status_code" => 1,
+                "message" => "Berhasil get data",
+                "data" => $data
+            ];
+            header('Content-Type: application/json');
+            echo json_encode($response);
+        } catch (Exception $ex) {
+            $response = [
+                "status" => "fail",
+                "status_code" => 0,
+                "message" => $ex->getMessage()
+            ];
+            header('Content-Type: application/json');
+            echo json_encode($response);
+        }
+    }
+
+    public function update($id) {
+        $data['name'] = $_POST['name'];
+        $data['jenis_kelamin'] = $_POST['jenis_kelamin'];
+        $data['tempat_lahir'] = $_POST['tempat_lahir'];
+        $data['tanggal_lahir'] = $_POST['tanggal_lahir'];
+        $data['alamat'] = $_POST['alamat'];
+
+        try {
+            $this->db->update($this->table, $id, $data);
+            $response = [
+                "status" => "success",
+                "status_code" => 1,
+                "message" => "Data berhasil diperbarui"
+            ];
+            header('Content-Type: application/json');
+            echo json_encode($response);
+        } catch (Exception $ex) {
+            $response = [
+                "status" => "fail",
+                "status_code" => 0,
+                "message" => $ex->getMessage()
+            ];
+            header('Content-Type: application/json');
+            echo json_encode($response);
+        }
+    }
+
+    public function delete($id) {
+        try {
+            $this->db->delete($this->table, $id);
+            $response = [
+                "status" => "success",
+                "status_code" => 1,
+                "message" => "Data berhasil dihapus"
+            ];
+            header('Content-Type: application/json');
+            echo json_encode($response);
+        } catch (Exception $ex) {
+            $response = [
+                "status" => "fail",
+                "status_code" => 0,
+                "message" => $ex->getMessage()
+            ];
+            header('Content-Type: application/json');
+            echo json_encode($response);
+        }
+    }
 }

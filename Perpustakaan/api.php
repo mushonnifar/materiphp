@@ -15,4 +15,16 @@ switch ($action) {
     case "store":
         $anggota->store();
         break;
+    case "edit":
+        $id = $_GET["id"];
+        $anggota->find($id);
+        break;
+    case "update":
+        $id = $_GET["id"];
+        $anggota->update($id);
+        break;
+    case "delete":
+        $id = $_GET["id"];
+        $anggota->delete($id);
+        break;
 }

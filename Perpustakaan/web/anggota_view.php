@@ -79,7 +79,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="save()">Save</button>
+                <button type="button" class="btn btn-primary" onclick="save()" id="btn-save">Save</button>
+                <button type="button" class="btn btn-primary" onclick="" id="btn-update">Update</button>
             </div>
         </div>
     </div>
@@ -103,21 +104,69 @@
     });
 
     function create() {
+        $('#anggota-form')[0].reset();
+        $('#btn-save').show();
+        $('#btn-update').hide();
         $('#anggota-modal').modal('show');
     }
 
     function save() {
         var data = $('#anggota-form').serializeArray();
         $.post('api.php?action=store', data)
-                .done(function (data) {
-                    if (data.status_code == 1) {
+                .done(function (response) {
+                    if (response.status_code == 1) {
                         $('#anggota-modal').modal('hide');
                         table.ajax.reload();
                     } else {
-                        alert(data.message);
+                        alert(response.message);
                     }
-
                 });
     }
 
+    function edit(id) {
+        $('#anggota-form')[0].reset();
+        $.get('api.php?action=edit&id=' + id)
+                .done(function (response) {
+                    if (response.status_code == 1) {
+                        $('[name="name"]').val(response.data.name);
+                        $('[name="jenis_kelamin"]').val([response.data.jenis_kelamin]);
+                        $('[name="tempat_lahir"]').val(response.data.tempat_lahir);
+                        $('[name="tanggal_lahir"]').val(response.data.tanggal_lahir);
+                        $('[name="alamat"]').val(response.data.alamat);
+
+                        $('#btn-save').hide();
+                        $('#btn-update').attr('onclick', 'update(' + response.data.id + ')');
+                        $('#btn-update').show();
+                        $('#anggota-modal').modal('show');
+                    } else {
+                        alert(response.message);
+                    }
+                });
+    }
+
+    function update(id) {
+        var data = $('#anggota-form').serializeArray();
+        $.post('api.php?action=update&id=' + id, data)
+                .done(function (response) {
+                    if (response.status_code == 1) {
+                        $('#anggota-modal').modal('hide');
+                        table.ajax.reload();
+                    } else {
+                        alert(response.message);
+                    }
+                });
+    }
+
+    function remove(id) {
+        if (confirm('Are you sure delete this data?')) {
+            $.get('api.php?action=delete&id=' + id)
+                    .done(function (response) {
+                        if (response.status_code == 1) {
+                            table.ajax.reload();
+                        } else {
+                            alert(data.message);
+                        }
+                    });
+        }
+    }
 </script>
